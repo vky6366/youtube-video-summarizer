@@ -38,3 +38,18 @@ class yt_parser():
             return match.group(1)
 
         return None
+
+if __name__ == "__main__":
+    test_urls = [
+        "https://www.youtube.com/watch?v=b-K4oDRk04M",
+        "https://youtu.be/b-K4oDRk04M",
+        "https://www.youtube.com/embed/b-K4oDRk04M",
+        "https://youtube.com/shorts/b-K4oDRk04M",
+        "https://www.youtube.com/watch?v=mdWe9HbA-P0",
+        "invalid_url",
+        "https://www.youtube.com/shorts/9JcC8re07a4"
+    ]
+    for url in test_urls:
+        vid = yt_parser(url).get_youtube_id()
+        print(f"URL: {url}\nExtracted video_id: {vid}\n")
+        print(datatype(vid))

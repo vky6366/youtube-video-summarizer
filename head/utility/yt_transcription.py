@@ -1,13 +1,15 @@
-from yt_url_parser import yt_parser
+from .yt_url_parser import yt_parser
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 class transcription():
-    def __init__(self,url):
+    def __init__(self, url):
         self.url = url
-        self.code = yt_parser.get_youtube_id(self.url)
+        self.code = yt_parser(self.url).get_youtube_id()
 
     def transcript(self):
+        if not self.code or not isinstance(self.code, str):
+            return "Invalid or missing YouTube video ID."
         try:
             # If you don’t care which language, this returns the “best” one
             transcript_list = YouTubeTranscriptApi.get_transcript(self.code, languages=["en"])
