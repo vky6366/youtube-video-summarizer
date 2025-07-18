@@ -11,7 +11,6 @@ class transcription():
         if not self.code or not isinstance(self.code, str):
             return "Invalid or missing YouTube video ID."
         try:
-            # If you don’t care which language, this returns the “best” one
             transcript_list = YouTubeTranscriptApi.get_transcript(self.code, languages=["en"])
 
             # Flatten it to plain text
